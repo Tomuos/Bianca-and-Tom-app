@@ -1,13 +1,11 @@
 import { Button , View, StyleSheet } from "react-native";
 
-export default function ButtonComp() {
+export default function ButtonComp({handleSpeech, title}) {
     return(
       <View>
          <Button
-        onPress={() => {
-          alert('You tapped the button!');
-        }}
-        title="Learn More"
+        onPress={handleSpeech}
+        title={title}
         color={'#841584'}
         // accessibilityLabel="Learn more about this purple button"
       /> 

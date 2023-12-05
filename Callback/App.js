@@ -2,18 +2,25 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import ButtonComp from './components/Button';
 import TextComp from './components/TextInput';
+import { Speak } from './components/Speech';
+import { useState } from 'react';
 
 export default function App() {
+  const [inputText, setInputText] = useState()
   return (
     <View style={styles.container}>
      
       <StatusBar style="auto" />
       <TextComp
         style={styles.input}
-        placeholder="Enter your name"
-        onChangeText={(text) => console.log(text)}
+        placeholder="Enter text"
+        onChangeText={setInputText}
+        value = {inputText}
       />
-      <ButtonComp/>
+      <ButtonComp
+        title="Speak"
+        handleSpeech= {() => Speak(inputText)}
+      />
       
     </View>
   );
