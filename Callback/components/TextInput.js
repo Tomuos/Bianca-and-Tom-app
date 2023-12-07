@@ -1,16 +1,19 @@
 // TextComp.js
 import React from 'react';
 import { TextInput, View, StyleSheet } from 'react-native';
-import { useFonts, Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from '@expo-google-fonts/roboto';
+import { useFonts, Roboto_700Bold } from '@expo-google-fonts/roboto';
 
 export default function TextComp({ placeholder, onChangeText, value }) {
 
-  let [fontsLoaded] = useFonts({
+  let fontsLoaded = useFonts({
     Roboto_700Bold,
   });
 
-  if (!fontsLoaded) {
-    console.log('Fonts not loaded');
+  if (fontsLoaded) {
+    console.log("Fonts loaded");
+  }
+  else {
+    console.log("Fonts not loaded");
     return null;
   }
 

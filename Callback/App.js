@@ -14,16 +14,17 @@ export default function App() {
   const [selectedVoice, setSelectedVoice] = useState();
   const [voices, setVoices] = useState();
 
-  let [fontsLoaded] = useFonts({
-    Roboto_400Regular,
-  });
-
-
   useEffect(() => {
     Speech.getAvailableVoicesAsync()
     .then(voiceData => setVoices(voiceData))
     
   }, []);
+
+  let fontsLoaded = useFonts({
+    Roboto_400Regular,
+  });
+
+
 
   if (!fontsLoaded) {
     console.log('Fonts not loaded');
@@ -31,30 +32,35 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
+      <View style={styles.container}>
+    
+          <View style={styles.box}>
      
-      <StatusBar style="auto" />
-      <TextComp
-        style={styles.input}
-        placeholder="Enter text"
-        onChangeText={setInputText}
-        value = {inputText}
-      />
-     <Picker
-        selectedValue={selectedVoice}
-        onValueChange={(itemValue, itemIndex) => setSelectedVoice(itemValue)}
-        style={styles.picker}
-      >
-        {voices && voices.map((voice, index) => (
-          <Picker.Item key={index} label={voice.name} value={voice.identifier} />
-        ))}
-      </Picker>
-
-      <ButtonComp
-    title="Speak"
-    handleSpeech={(selectedVoice) => Speak(inputText, selectedVoice)} // Pass selectedVoice here
-    selectedVoice={selectedVoice} // Pass selectedVoice as a prop
-/>
+                <StatusBar style="auto" />
+      
+              <View style={styles.innerContainer}>
+                <TextComp
+                  style={styles.input}
+                  placeholder="Enter text"
+                  onChangeText={setInputText}
+                  value = {inputText}
+                />
+                <Picker
+                  selectedValue={selectedVoice}
+                  onValueChange={(itemValue, itemIndex) => setSelectedVoice(itemValue)}
+                  style={styles.picker}
+                >
+                  {voices && voices.map((voice, index) => (
+                    <Picker.Item key={index} label={voice.name} value={voice.identifier} />
+                  ))}
+                </Picker>
+              </View>
+          </View>
+                <ButtonComp
+                          title="Speak"
+                          handleSpeech={(selectedVoice) => Speak(inputText, selectedVoice)} // Pass selectedVoice here
+                          selectedVoice={selectedVoice} // Pass selectedVoice as a prop
+                />      
 
       
     </View>
@@ -65,8 +71,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#25292e',
+    alignItems: 'column',
+    justifyContent: 'center',
+  
+  },
+
+  
+  box: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'aquamarine',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 20,
+    width: '100%',
+    height: '20%',
+  },
+
+  innerContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
+    width: '100%',
+    height: '100%',
   },
   picker: {
     width: '80%',
@@ -74,8 +101,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#333',
     marginBottom: 20,
     fontFamily: "Roboto_400Regular",
-    fontSize: 16,
-
+    fontSize: 15,
+  
   },
 });
 
