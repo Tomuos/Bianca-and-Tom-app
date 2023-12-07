@@ -6,6 +6,7 @@ import { Speak } from './components/Speech';
 import { useState, useEffect } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import * as Speech from 'expo-speech';
+import { useFonts, Roboto_400Regular } from '@expo-google-fonts/roboto';
 
 
 export default function App() {
@@ -13,11 +14,21 @@ export default function App() {
   const [selectedVoice, setSelectedVoice] = useState();
   const [voices, setVoices] = useState();
 
+  let [fontsLoaded] = useFonts({
+    Roboto_400Regular,
+  });
+
+
   useEffect(() => {
     Speech.getAvailableVoicesAsync()
     .then(voiceData => setVoices(voiceData))
     
   }, []);
+
+  if (!fontsLoaded) {
+    console.log('Fonts not loaded');
+    return null;
+  }
 
   return (
     <View style={styles.container}>
@@ -62,6 +73,9 @@ const styles = StyleSheet.create({
     color: 'white',
     backgroundColor: '#333',
     marginBottom: 20,
+    fontFamily: "Roboto_400Regular",
+    fontSize: 16,
+
   },
 });
 
