@@ -19,7 +19,10 @@ export default function TextComp({ placeholder, onChangeText, value }) {
 
   return (
     <View style={localStyles.container}>
+    
       <TextInput
+        multiline = {true}
+        numberOfLines = {4}
         style={localStyles.input}
         placeholder={placeholder}
         placeholderTextColor='white'
@@ -32,7 +35,7 @@ export default function TextComp({ placeholder, onChangeText, value }) {
 
 const localStyles = StyleSheet.create({ 
   input: {
-    height: 40,
+    height: '40',
     margin: 12,
     borderWidth: 1,
     padding: 10,
@@ -40,10 +43,10 @@ const localStyles = StyleSheet.create({
     borderColor: 'white',
     color: 'white', // Set the input text color to white for visibility on dark background
     backgroundColor: '#5a5a5a',
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: "Roboto_700Bold",
   },
   container: {
-    width: '80%', // Set the width of the container to fit within the view
+    width: '100%', // Set the width of the container to fit within the view
   },
 });

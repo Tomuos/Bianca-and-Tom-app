@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import ButtonComp from './components/Button';
 import TextComp from './components/TextInput';
 import { Speak } from './components/Speech';
@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import * as Speech from 'expo-speech';
 import { useFonts, Roboto_400Regular } from '@expo-google-fonts/roboto';
+import  StopButton from './components/StopButton';
 
 
 export default function App() {
@@ -54,14 +55,19 @@ export default function App() {
                     <Picker.Item key={index} label={voice.name} value={voice.identifier} />
                   ))}
                 </Picker>
-              </View>
-          </View>
                 <ButtonComp
                           title="Speak"
                           handleSpeech={(selectedVoice) => Speak(inputText, selectedVoice)} // Pass selectedVoice here
                           selectedVoice={selectedVoice} // Pass selectedVoice as a prop
-                />      
-
+                />   
+                
+            <StopButton  
+                    handleStopPress={(Speech.stop)}
+                    
+            />
+              </View>
+          </View>
+          
       
     </View>
   );
@@ -78,14 +84,17 @@ const styles = StyleSheet.create({
 
   
   box: {
+    
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'aquamarine',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
-    width: '100%',
-    height: '20%',
+    width: '90%',
+    height: '30',
+    margin: 'auto',
+    borderRadius: 10,
   },
 
   innerContainer: {
@@ -95,6 +104,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+
   picker: {
     width: '80%',
     color: 'white',
