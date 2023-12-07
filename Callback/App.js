@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import ButtonComp from './components/Button';
 import TextComp from './components/TextInput';
-import { Speak } from './components/Speech';
+import { Speak, StopSpeech } from './components/Speech';
 import { useState, useEffect } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import * as Speech from 'expo-speech';
@@ -62,8 +62,7 @@ export default function App() {
                 />   
                 
             <StopButton  
-                    handleStopPress={(Speech.stop)}
-                    
+                    handleStopPress={() => StopSpeech()}     
             />
               </View>
           </View>

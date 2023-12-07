@@ -13,3 +13,7 @@ export function Speak(text, selectedVoice) {
     }
     Speech.speak(text, options);
 }
+
+export function StopSpeech() {
+    Speech.stop()
+}
