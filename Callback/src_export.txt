@@ -1,31 +1,44 @@
 ==== ./components/Button.js ====
-import { Button , View, StyleSheet } from "react-native";
+import React from 'react';
+import { Button, View, StyleSheet } from 'react-native';
 
-export default function ButtonComp() {
-    return(
-      <View>
-         <Button
-        onPress={() => {
-          alert('You tapped the button!');
-        }}
-        title="Learn More"
-        color={'#841584'}
-        // accessibilityLabel="Learn more about this purple button"
-      /> 
-      </View>
+export default function ButtonComp({ handleSpeech, title, selectedVoice }) {
+    return (
+        <View>
+            <Button
+                onPress={() => handleSpeech(selectedVoice)} // Pass selectedVoice to handleSpeech
+                title={title}
+                color={'#841584'}
+            />
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: '#841584',
-      alignItems: 'center',
-      justifyContent: 'center',
+        flex: 1,
+        backgroundColor: '#841584',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-  });
+});
 ==== ./components/Speech.js ====
-==== ./components/TextInput.js ====
+import * as Speech from "expo-speech";
+
+export async function GetAvailableVoices() {
+    const voices = await Speech.getAvailableVoicesAsync();
+    return voices;
+}
+
+
+export function Speak(text) {
+    let option = {};
+    if (voice) {
+        option.voice = voice;
+    }
+    Speech.speak(text)
+
+}==== ./components/TextInput.js ====
 // TextComp.js
 import React from 'react';
 import { TextInput, View, StyleSheet } from 'react-native';
